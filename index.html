@@ -1,55 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rastreador de Finanzas Personales</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
-  <header>
+  <header class="header">
     <h1>Rastreador de Finanzas Personales</h1>
   </header>
 
-  <main class="layout">
-    <!-- Formulario para agregar transacciones -->
-    <section id="form-section">
-      <h2>Agregar Transacción</h2>
+  <main class="grid-container">
+    <!-- Moneda fija -->
+    <div class="card top-card">
+      <div class="card-header">
+        <img src="https://i.imgur.com/1XH9YfO.png" alt="Peso Colombiano" class="card-icon"/>
+        <h2>Moneda</h2>
+      </div>
+      <p>COP – Peso Colombiano</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="card top-card">
+      <div class="card-header"><h2>Agregar Transacción</h2></div>
       <form id="transaction-form">
-        <label for="type">Tipo:</label>
-        <select id="type" required>
-          <option value="gasto">Gasto</option>
-          <option value="ingreso">Ingreso</option>
-        </select>
-        
-        <label for="category">Categoría:</label>
-        <select id="category" required>
-          <option value="Entretenimiento">Entretenimiento</option>
-          <option value="Comidas y bebidas">Comidas y bebidas</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Casa">Casa</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Vehículo">Vehículo</option>
-          <option value="Comunicación">Comunicación</option>
-          <option value="Gastos financiarios">Gastos financiarios</option>
-          <option value="Inversiones">Inversiones</option>
-          <option value="Salud">Salud</option>
-        </select>
-
-        <label for="description">Descripción:</label>
-        <input type="text" id="description" required>
-
-        <label for="amount">Monto:</label>
-        <input type="number" id="amount" required>
-
-        <button type="submit">Agregar Transacción</button>
+        <div class="form-group">
+          <label for="type">Tipo</label>
+          <select id="type" required>
+            <option value="gasto">Gasto</option>
+            <option value="ingreso">Ingreso</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="category">Categoría</label>
+          <select id="category" required>
+            <option>Entretenimiento</option>
+            <option>Comidas y bebidas</option>
+            <option>Shopping</option>
+            <option>Casa</option>
+            <option>Transporte</option>
+            <option>Vehículo</option>
+            <option>Comunicación</option>
+            <option>Gastos financiarios</option>
+            <option>Inversiones</option>
+            <option>Salud</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <input type="text" id="description" required/>
+        </div>
+        <div class="form-group">
+          <label for="amount">Monto</label>
+          <input type="text" id="amount" placeholder="Ej. 200000 o 200.000" required/>
+        </div>
+        <button type="submit" class="btn">Agregar</button>
       </form>
-    </section>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card top-card">
+      <div class="card-header"><h2>Filtrar Transacciones</h2></div>
+      <div class="filters">
+        <div class="form-group">
+          <label for="filter-type">Tipo</label>
+          <select id="filter-type">
+            <option value="">Todos</option>
+            <option value="ingreso">Ingreso</option>
+            <option value="gasto">Gasto</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-category">Categoría</label>
+          <select id="filter-category">
+            <option value="">Todas</option>
+            <option>Entretenimiento</option>
+            <option>Comidas y bebidas</option>
+            <option>Shopping</option>
+            <option>Casa</option>
+            <option>Transporte</option>
+            <option>Vehículo</option>
+            <option>Comunicación</option>
+            <option>Gastos financiarios</option>
+            <option>Inversiones</option>
+            <option>Salud</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-date">Fecha</label>
+          <input type="date" id="filter-date"/>
+        </div>
+      </div>
+    </div>
 
     <!-- Tabla de Transacciones -->
-    <section id="transactions-section">
-      <h2>Transacciones</h2>
+    <div class="card table-card">
+      <div class="card-header"><h2>Transacciones</h2></div>
       <table id="transactions-table">
         <thead>
           <tr>
@@ -61,33 +112,25 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Las transacciones se llenarán dinámicamente aquí -->
-        </tbody>
+        <tbody></tbody>
       </table>
-    </section>
+    </div>
 
-    <!-- Resumen de categorías y gráficos -->
-    <section id="summary">
-      <h2>Resumen Financiero</h2>
-      <div id="category-summary">
-        <!-- Resumen de gastos por categoría -->
+    <!-- Resumen Financiero -->
+    <div class="card summary-card">
+      <div class="card-header"><h2>Resumen Financiero</h2></div>
+      <div id="category-summary"></div>
+      <div class="chart-container">
+        <canvas id="category-chart"></canvas>
       </div>
-      <div id="chart-section" class="chart-section">
-        <h3>Gráfico de Gastos por Categoría</h3>
-        <div class="chart-container">
-          <canvas id="category-chart"></canvas>
-        </div>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <footer>
+  <footer class="footer">
     <p>&copy; 2025 Finanzas Personales</p>
   </footer>
 
-  <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
