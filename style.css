@@ -1,0 +1,185 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body general */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Encabezado */
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  background-color: #e0e0e0;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Layout principal */
+main.layout {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Responsive Grid */
+@media (max-width: 600px) {
+  main.layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  main.layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chart-section {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1025px) {
+  main.layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .chart-section {
+    grid-column: span 3;
+  }
+}
+
+/* Secciones generales */
+section {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Formulario */
+form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+form input,
+form select,
+form button {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Tabla de transacciones */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.6rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Botones de acción en tabla */
+.actions {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+}
+
+.actions button {
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: white;
+}
+
+.actions .edit {
+  background-color: #2196F3;
+}
+
+.actions .delete {
+  background-color: #f44336;
+}
+
+.actions .view {
+  background-color: #ff9800;
+}
+
+/* Resumen de categorías */
+#summary {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.category-summary {
+  padding: 0.6rem;
+  background-color: #e0f7fa;
+  border-left: 4px solid #00acc1;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Gráficos */
+.chart-section {
+  width: 100%;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 600px; /* Limita el tamaño máximo */
+  margin: 0 auto; /* Centra el gráfico */
+}
+
+canvas {
+  width: 100% !important;
+  max-height: 300px !important; /* Limita el alto */
+  height: auto !important;
+  display: block;
+}
+
+/* Botones generales */
+button {
+  transition: background-color 0.2s ease;
+}

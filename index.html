@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rastreador de Finanzas Personales</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Rastreador de Finanzas Personales</h1>
+  </header>
+
+  <main class="layout">
+    <!-- Formulario para agregar transacciones -->
+    <section id="form-section">
+      <h2>Agregar Transacción</h2>
+      <form id="transaction-form">
+        <label for="type">Tipo:</label>
+        <select id="type" required>
+          <option value="gasto">Gasto</option>
+          <option value="ingreso">Ingreso</option>
+        </select>
+        
+        <label for="category">Categoría:</label>
+        <select id="category" required>
+          <option value="Entretenimiento">Entretenimiento</option>
+          <option value="Comidas y bebidas">Comidas y bebidas</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Casa">Casa</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Vehículo">Vehículo</option>
+          <option value="Comunicación">Comunicación</option>
+          <option value="Gastos financiarios">Gastos financiarios</option>
+          <option value="Inversiones">Inversiones</option>
+          <option value="Salud">Salud</option>
+        </select>
+
+        <label for="description">Descripción:</label>
+        <input type="text" id="description" required>
+
+        <label for="amount">Monto:</label>
+        <input type="number" id="amount" required>
+
+        <button type="submit">Agregar Transacción</button>
+      </form>
+    </section>
+
+    <!-- Tabla de Transacciones -->
+    <section id="transactions-section">
+      <h2>Transacciones</h2>
+      <table id="transactions-table">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Tipo</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las transacciones se llenarán dinámicamente aquí -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Resumen de categorías y gráficos -->
+    <section id="summary">
+      <h2>Resumen Financiero</h2>
+      <div id="category-summary">
+        <!-- Resumen de gastos por categoría -->
+      </div>
+      <div id="chart-section" class="chart-section">
+        <h3>Gráfico de Gastos por Categoría</h3>
+        <div class="chart-container">
+          <canvas id="category-chart"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Finanzas Personales</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>
