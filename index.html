@@ -1,106 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rastreador de Finanzas Personales</title>
-
-  <!-- SweetAlert2 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestor Financiero</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header class="header">
-    <h1>Rastreador de Finanzas Personales</h1>
+  <header>
+    <h1>Gestor de Ingresos y Gastos</h1>
   </header>
 
-  <main class="grid-container">
-    <!-- Moneda fija -->
-    <div class="card top-card">
-      <div class="card-header">
-        <img src="https://i.imgur.com/1XH9YfO.png" alt="Peso Colombiano" class="card-icon"/>
-        <h2>Moneda</h2>
-      </div>
-      <p>COP – Peso Colombiano</p>
-    </div>
-
-    <!-- Formulario -->
-    <div class="card top-card">
-      <div class="card-header"><h2>Agregar Transacción</h2></div>
+  <main>
+    <section aria-label="Formulario de transacción">
+      <h2>Agregar Transacción</h2>
       <form id="transaction-form">
-        <div class="form-group">
-          <label for="type">Tipo</label>
-          <select id="type" required>
-            <option value="gasto">Gasto</option>
-            <option value="ingreso">Ingreso</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="category">Categoría</label>
-          <select id="category" required>
-            <option>Entretenimiento</option>
-            <option>Comidas y bebidas</option>
-            <option>Shopping</option>
-            <option>Casa</option>
-            <option>Transporte</option>
-            <option>Vehículo</option>
-            <option>Comunicación</option>
-            <option>Gastos financiarios</option>
-            <option>Inversiones</option>
-            <option>Salud</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <input type="text" id="description" required/>
-        </div>
-        <div class="form-group">
-          <label for="amount">Monto</label>
-          <input type="text" id="amount" placeholder="Ej. 200000 o 200.000" required/>
-        </div>
-        <button type="submit" class="btn">Agregar</button>
+        <label for="type">Tipo:</label>
+        <select id="type" required>
+          <option value="">Seleccione</option>
+          <option value="ingreso">Ingreso</option>
+          <option value="gasto">Gasto</option>
+        </select>
+
+        <label for="category">Categoría:</label>
+        <select id="category" required>
+          <option value="">Seleccione</option>
+          <option value="Salario">Salario</option>
+          <option value="Comida">Comida</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Educación">Educación</option>
+          <option value="Ocio">Otro</option>
+        </select>
+
+        <label for="description">Descripción:</label>
+        <input type="text" id="description" required>
+
+        <label for="amount">Monto:</label>
+        <input type="text" id="amount" required>
+
+        <button type="submit">Guardar</button>
       </form>
-    </div>
+    </section>
 
-    <!-- Filtros -->
-    <div class="card top-card">
-      <div class="card-header"><h2>Filtrar Transacciones</h2></div>
-      <div class="filters">
-        <div class="form-group">
-          <label for="filter-type">Tipo</label>
-          <select id="filter-type">
-            <option value="">Todos</option>
-            <option value="ingreso">Ingreso</option>
-            <option value="gasto">Gasto</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="filter-category">Categoría</label>
-          <select id="filter-category">
-            <option value="">Todas</option>
-            <option>Entretenimiento</option>
-            <option>Comidas y bebidas</option>
-            <option>Shopping</option>
-            <option>Casa</option>
-            <option>Transporte</option>
-            <option>Vehículo</option>
-            <option>Comunicación</option>
-            <option>Gastos financiarios</option>
-            <option>Inversiones</option>
-            <option>Salud</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="filter-date">Fecha</label>
-          <input type="date" id="filter-date"/>
-        </div>
-      </div>
-    </div>
+    <section aria-label="Filtros de búsqueda">
+      <h2>Filtrar Transacciones</h2>
+      <label for="filter-type">Tipo:</label>
+      <select id="filter-type">
+        <option value="">Todos</option>
+        <option value="ingreso">Ingreso</option>
+        <option value="gasto">Gasto</option>
+      </select>
 
-    <!-- Tabla de Transacciones -->
-    <div class="card table-card">
-      <div class="card-header"><h2>Transacciones</h2></div>
+      <label for="filter-category">Categoría:</label>
+      <select id="filter-category">
+        <option value="">Todas</option>
+        <option value="Salario">Salario</option>
+        <option value="Comida">Comida</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Educación">Educación</option>
+        <option value="Ocio">Otro</option>  
+      </select>
+
+      <label for="filter-date">Fecha:</label>
+      <input type="date" id="filter-date">
+    </section>
+
+    <section aria-label="Listado de transacciones">
+      <h2>Transacciones</h2>
       <table id="transactions-table">
         <thead>
           <tr>
@@ -114,23 +82,36 @@
         </thead>
         <tbody></tbody>
       </table>
-    </div>
+    </section>
 
-    <!-- Resumen Financiero -->
-    <div class="card summary-card">
-      <div class="card-header"><h2>Resumen Financiero</h2></div>
+    <section aria-label="Resumen financiero">
+      <h2>Resumen</h2>
       <div id="category-summary"></div>
-      <div class="chart-container">
-        <canvas id="category-chart"></canvas>
-      </div>
-    </div>
+    </section>
+    <section aria-label="Importar y Exportar CSV">
+      <h2>Importar / Exportar</h2>
+      <button onclick="exportToCSV()">Exportar CSV</button>
+      <input type="file" id="import-csv" accept=".csv">
+    </section>
+
+
+    <label for="chart-type">Tipo de gráfico:</label>
+    <select id="chart-type" aria-label="Seleccionar tipo de gráfico">
+      <option value="todos">Todos</option>
+      <option value="gasto">Gastos</option>
+      <option value="ingreso">Ingresos</option>
+    </select>
+
+<canvas id="category-chart" aria-label="Gráfico de categorías" role="img"></canvas>
+
+
+
   </main>
 
-  <footer class="footer">
-    <p>&copy; 2025 Finanzas Personales</p>
+  <footer>
+    <p>© 2025 Gestor Financiero</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
